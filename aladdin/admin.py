@@ -1,19 +1,22 @@
 from django.contrib import admin
-from .models import Trade, Portfolio, Security
+from .models import Portfolio, Coin, Transaction
 # Register your models here.
 
-class SecurityAdmin(admin.ModelAdmin):
-    list_display = ('cutip','ticker','name',)
 
-admin.site.register(Security, SecurityAdmin)
 
-class TradeAdmin(admin.ModelAdmin):
-    list_display = ('trade_id','cutip','number_of_coins','trade_price','total_trade_value', 'date', 'portfolio_id')
 
-admin.site.register(Trade, TradeAdmin)
+class CoinAdmin(admin.ModelAdmin):
+    list_display = ('name','portfolio',)
+
+admin.site.register(Coin, CoinAdmin)
+
+class TransactionAdmin(admin.ModelAdmin):
+    list_display = ('stock','number_of_coins','trade_price','date','total_trade_value',)
+
+admin.site.register(Transaction, TransactionAdmin)
 
 class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('portfolio_id','name','total_porfolio_value','total_coin_value')
+    list_display = ('user','name', )
 
 admin.site.register(Portfolio, PortfolioAdmin)
 
