@@ -12,6 +12,11 @@ class Portfolio(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def nos(self):
+        """return Transaction.objects.all()"""
+        valami =  Transaction.objects.all()
+        
+        
     
 class Coin(models.Model):
     """Model representing an individial security"""
@@ -24,6 +29,9 @@ class Coin(models.Model):
         
     def __str__(self):
         return str(self.name)
+
+    def number_bought(Self):
+        return Transaction.objects.all().aggregate(Count('number_of_coins',distinct=True))
 
 class Transaction(models.Model):
     stock = models.ForeignKey('Coin',on_delete=models.CASCADE)
