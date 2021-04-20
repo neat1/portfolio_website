@@ -12,13 +12,9 @@ class TradeAdmin(admin.ModelAdmin):
 
 admin.site.register(Trade, TradeAdmin)
 
-class TradeAdminInline(admin.TabularInline):
-    model = Trade
-    extra = 0
 
 class PortfolioAdmin(admin.ModelAdmin):
     list_display = ('portfolio_id','name','total_porfolio_value','total_coin_value')
-    inlines = [TradeAdminInline]
 
 admin.site.register(Portfolio, PortfolioAdmin)
 
