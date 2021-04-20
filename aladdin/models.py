@@ -17,7 +17,7 @@ class Security(models.Model):
 
 
 class Portfolio(models.Model):
-    """Model representing an individial portfolio. commit test"""
+    """Model representing an individial portfolio."""
     portfolio_id = models.IntegerField(primary_key=True, unique=True,auto_created=True,editable=False,)
     name = models.CharField(max_length=200, help_text='Enter a portfolio name (e.g. Andras portfolio') 
 
@@ -27,7 +27,7 @@ class Portfolio(models.Model):
     def __str__(self):
         return self.name
 
-    """maybe useful later4"""
+    """maybe useful later"""
     @property
     def average_trade_price(self):
         return Trade.objects.all().aggregate(Avg('trade_price'))
