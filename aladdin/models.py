@@ -17,7 +17,7 @@ class Security(models.Model):
 
 
 class Portfolio(models.Model):
-    """Model representing an individial portfolio."""
+    """Model representing an individial portfolio. commit test"""
     portfolio_id = models.IntegerField(primary_key=True, unique=True,auto_created=True,editable=False,)
     name = models.CharField(max_length=200, help_text='Enter a portfolio name (e.g. Andras portfolio') 
 
