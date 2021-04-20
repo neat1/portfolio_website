@@ -12,7 +12,6 @@ class TradeAdmin(admin.ModelAdmin):
 
 admin.site.register(Trade, TradeAdmin)
 
-
 class PortfolioAdmin(admin.ModelAdmin):
     list_display = ('portfolio_id','name','total_porfolio_value','total_coin_value')
 
