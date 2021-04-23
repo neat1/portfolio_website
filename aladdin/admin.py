@@ -11,12 +11,12 @@ class CoinAdmin(admin.ModelAdmin):
 admin.site.register(Coin, CoinAdmin)
 
 class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('portfolio_id','total_porfolio_value','user', 'name','average_trade_price','just_doge_coin','number_bought')
+    list_display = ('portfolio_id','total_porfolio_value','user', 'name','average_trade_price','just_doge_coin','number_bought','username')
    
 admin.site.register(Portfolio, PortfolioAdmin)
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('trade_id','portfolio_id','cutip','number_of_coins','trade_price','date','show_ticker')
+    list_display = ('trade_id','portfolio_id','cutip','number_of_coins','trade_price','date','show_ticker','show_ticker2',)
 
 admin.site.register(Transaction, TransactionAdmin)
 

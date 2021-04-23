@@ -9,20 +9,25 @@
   <body>
     <ul>
       {% for member in transactions %}
-      <li><strong>:</strong> {{ member.cutip}}</li>
+      <li><strong>Name of the crypto:</strong> {{ member.cutip}}</li>
+      <p></p>
       <li>
         <strong> total_trade_value:</strong> {{ member.total_trade_value }}
       </li>
-      <li><strong>ticker available:</strong> {{ member.show_ticker }}</li>
-
+      <p></p>
+      <li><strong>ticker available:</strong> {{ member.show_ticker2 }}</li>
       {% endfor %}
     </ul>
     <p>one cutip :</p>
+    <p>/////////////////////////////////////////////////////////////
+    </p>
     <ul>
       <li><strong>one cutip:</strong> {{ one.cutip}}</li>
       <li><strong>number_of_coins</strong> {{ one.number_of_coins}}</li>
       <li><strong> total_trade_value:</strong> {{ one.total_trade_value }}</li>
-      <li><strong>ticker available:</strong> {{ one.show_ticker }}</li>
+      <li><strong>ticker available:</strong> {{ one.show_ticker2 }}</li>
     </ul>
   </body>
+  
+  </ul>
 </html>
