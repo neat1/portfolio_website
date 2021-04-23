@@ -6,17 +6,17 @@ from .models import Portfolio, Coin, Transaction
 
 
 class CoinAdmin(admin.ModelAdmin):
-    list_display = ('cutip','ticker','name')
+    list_display = ('ticker','name')
 
 admin.site.register(Coin, CoinAdmin)
 
 class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('portfolio_id','total_porfolio_value','user', 'name','average_trade_price','just_doge_coin','number_bought','username')
+    list_display = ('user', 'name')
    
 admin.site.register(Portfolio, PortfolioAdmin)
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('trade_id','portfolio_id','cutip','number_of_coins','trade_price','date','show_ticker','show_ticker2',)
+    list_display = ('number_of_coins','trade_price','date',)
 
 admin.site.register(Transaction, TransactionAdmin)
 

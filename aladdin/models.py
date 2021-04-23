@@ -28,48 +28,6 @@ class Portfolio(models.Model):
     def __str__(self):
         return self.name
 
-    """maybe useful later"""
-    @property
-    def average_trade_price(self):
-        return Transaction.objects.all()
-        """is the same as self.transaction_set.all()"""
-
-        """here below is the average trade price method"""
-        """.aggregate(Avg('trade_price'))"""
-    
-    """maybe useful later"""
-    @property
-    def number_of_distinct_cutips(self):
-        return Trade.objects.all().aggregate(Count('cutip',distinct=True))
-
-    @property
-    def just_cusips(self):
-        return [transaction.cutip for transaction in self.transaction_set.all()]
-        """return self.transaction_set.all().filter(cutip = 3)"""
-
-    @property
-    def just_doge_coin(self):
-        return sum([transaction.total_trade_value for transaction in self.transaction_set.all().filter(cutip = 3)])
-        """return self.transaction_set.all().filter(cutip = 3)"""
-
-    @property
-    def username(self):
-        maha= Transaction.objects.first()
-        haha = Portfolio.objects.first()
-        return maha.portfolio_id.user
-
-    @property
-    def total_porfolio_value(self):
-        return sum([transaction.total_trade_value for transaction in self.transaction_set.all()])
-
-    @property
-    def total_coin_value(self):
-        return ([transaction.total_trade_value for transaction in self.transaction_set.all().filter(portfolio_id=1)])
-        
-    @property
-    def number_bought(Self):
-        
-        return Transaction.objects.annotate(Count('number_of_coins',distinct=True))
 
 class Transaction(models.Model):
     """Model representing a Cryptocurrency."""
@@ -91,19 +49,7 @@ class Transaction(models.Model):
     def total_trade_value(self):
         return self.trade_price * self.number_of_coins
 
-    @property
-    def show_ticker(self):
-        all_entries = Coin.objects.all()
-        return all_entries[0].ticker
-    @property
-    def show_ticker2(self):
-        return [transaction.cutip.ticker for transaction in Transaction.objects.all()]
-
-    @property
-    def filter_user(self):
-        return [transaction.cutip.ticker for transaction in Transaction.objects.all()]
-    
-
+  
 
 
     
