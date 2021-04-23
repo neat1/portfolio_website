@@ -1,12 +1,11 @@
 from django.db import models
 from django.db.models import Avg, Count, Sum
-import uuid
 from django.contrib.auth.models import User
 
 # Create your models here.
 class Coin(models.Model):
     """Model representing an individial security"""
-    cutip = models.IntegerField(primary_key=True, unique=True,)
+    cutip = models.IntegerField(primary_key=True, unique=True, editable=False)
     ticker = models.CharField(max_length=200, unique=True, help_text='Look up the ticker manually now')
     name = models.CharField(max_length=200, help_text='Enter a cryptocurrency name (e.g. Bitcoin)')
 
@@ -21,7 +20,7 @@ class Portfolio(models.Model):
     """Model representing an individial portfolio."""
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,blank=True)
     portfolio_id = models.IntegerField(primary_key=True, unique=True,auto_created=True,editable=False,)
-    name = models.CharField(max_length=200, help_text='Enter a portfolio name (e.g. Andras portfolio') 
+    name = models.CharField(max_length=200, help_text='Enter a portfolio name (e.g. Andras portfolio')
 
     class Meta:
         ordering = ['name']
@@ -32,7 +31,11 @@ class Portfolio(models.Model):
     """maybe useful later"""
     @property
     def average_trade_price(self):
-        return Trade.objects.all().aggregate(Avg('trade_price'))
+        return Transaction.objects.all()
+        """is the same as self.transaction_set.all()"""
+
+        """here below is the average trade price method"""
+        """.aggregate(Avg('trade_price'))"""
     
     """maybe useful later"""
     @property
@@ -40,12 +43,22 @@ class Portfolio(models.Model):
         return Trade.objects.all().aggregate(Count('cutip',distinct=True))
 
     @property
+    def just_cusips(self):
+        return [transaction.cutip for transaction in self.transaction_set.all()]
+        """return self.transaction_set.all().filter(cutip = 3)"""
+
+    @property
+    def just_doge_coin(self):
+        return sum([transaction.total_trade_value for transaction in self.transaction_set.all().filter(cutip = 3)])
+        """return self.transaction_set.all().filter(cutip = 3)"""
+
+    @property
     def total_porfolio_value(self):
-        return sum([trade.total_trade_value for trade in self.trade_set.all()])
+        return sum([transaction.total_trade_value for transaction in self.transaction_set.all()])
 
     @property
     def total_coin_value(self):
-        return ([trade.total_trade_value for trade in self.trade_set.all().filter(portfolio_id=1)])
+        return ([transaction.total_trade_value for transaction in self.transaction_set.all().filter(portfolio_id=1)])
         
     @property
     def number_bought(Self):
@@ -70,7 +83,5 @@ class Transaction(models.Model):
     @property
     def total_trade_value(self):
         return self.trade_price * self.number_of_coins
-    
-    
-    
+
    
