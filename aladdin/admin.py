@@ -16,7 +16,7 @@ class PortfolioAdmin(admin.ModelAdmin):
 admin.site.register(Portfolio, PortfolioAdmin)
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('trade_id','portfolio_id','cutip','number_of_coins','trade_price','date')
+    list_display = ('trade_id','portfolio_id','cutip','number_of_coins','trade_price','date','show_ticker')
 
 admin.site.register(Transaction, TransactionAdmin)
 

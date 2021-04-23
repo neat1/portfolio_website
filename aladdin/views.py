@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from .models import *
+from .models import Transaction
 
 # Create your views here.
 
 def index(request):
-	all_cusip = Trade.objects.all()
-	one_cusip = Trade.objects.get(pk=1)
-	name = Trade.objects.name
-	context = {'cusipok': all_cusip,
-	'one': one_cusip }
+	
+	all_transactions = Transaction.objects.all().filter(portfolio_id=1)
+	one_transaction = Transaction.objects.get(pk=1)
+	name = Transaction.objects.name
+	context = {'transactions': all_transactions,
+	'one': one_transaction }
 	return render(request, 'aladdin/home.html', context)
 	

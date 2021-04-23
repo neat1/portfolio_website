@@ -84,4 +84,13 @@ class Transaction(models.Model):
     def total_trade_value(self):
         return self.trade_price * self.number_of_coins
 
+    @property
+    def show_ticker(self):
+        return Coin.cutip
+    """def show_ticker(self):
+        return [valami.ticker for valami in Coin.objects.all()]"""
+        
+
+
+    
    

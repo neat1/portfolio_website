@@ -8,12 +8,21 @@
   </head>
   <body>
     <ul>
-      {% for valami in cusipok %}
-      <li><strong>cusip:</strong> {{ valami.name}}</li>
-      <li><strong>name:</strong> {{ valami.price }}</li>
-      <li><strong>ticker available:</strong> {{ valami.shares }}</li>
-      <li><strong>Authors:</strong> {{ valami.total_value }}</li>
+      {% for member in transactions %}
+      <li><strong>:</strong> {{ member.cutip}}</li>
+      <li>
+        <strong> total_trade_value:</strong> {{ member.total_trade_value }}
+      </li>
+      <li><strong>ticker available:</strong> {{ member.show_ticker }}</li>
+
       {% endfor %}
+    </ul>
+    <p>one cutip :</p>
+    <ul>
+      <li><strong>one cutip:</strong> {{ one.cutip}}</li>
+      <li><strong>number_of_coins</strong> {{ one.number_of_coins}}</li>
+      <li><strong> total_trade_value:</strong> {{ one.total_trade_value }}</li>
+      <li><strong>ticker available:</strong> {{ one.show_ticker }}</li>
     </ul>
   </body>
 </html>
