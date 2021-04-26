@@ -29,11 +29,6 @@ class Portfolio(models.Model):
 
     def total_portfolio_value(self):
         return sum([transaction.total_trade_value for transaction in self.transaction_set.all()])
-
-    def valami(self):
-        
-        queary = self.transaction_set.all() 
-        return queary
     
 
 class Transaction(models.Model):
@@ -58,5 +53,13 @@ class Transaction(models.Model):
     @property
     def transaction_ticker(self):
         return self.coin.ticker
+      
 
-   
+class PortfolioView(models.Model):
+    coin = models.OneToOneField(Coin,on_delete=models.CASCADE,primary_key=True)
+    portfolio = models.ForeignKey(Portfolio,on_delete=models.CASCADE, default='SOME STRING')
+
+    @property
+    def distinct_coin(self):
+       return  self.coin.ticker
+    
