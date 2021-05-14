@@ -3,6 +3,7 @@ from django.db.models import Avg, Count, Sum
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
 class Coin(models.Model):
     """Model representing an cryptocurrency."""
@@ -54,12 +55,3 @@ class Transaction(models.Model):
     def transaction_ticker(self):
         return self.coin.ticker
       
-
-class PortfolioView(models.Model):
-    coin = models.OneToOneField(Coin,on_delete=models.CASCADE,primary_key=True)
-    portfolio = models.ForeignKey(Portfolio,on_delete=models.CASCADE, default='SOME STRING')
-
-    @property
-    def distinct_coin(self):
-       return  self.coin.ticker
-    

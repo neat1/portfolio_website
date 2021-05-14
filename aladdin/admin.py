@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Portfolio, Coin, Transaction, PortfolioView
+from .models import Portfolio, Coin, Transaction
 # Register your models here.
 
 
@@ -20,9 +20,5 @@ class TransactionAdmin(admin.ModelAdmin):
 
 admin.site.register(Transaction, TransactionAdmin)
 
-class PortfolioViewAdmin(admin.ModelAdmin):
-    list_display = ('coin','portfolio','distinct_coin')
-   
-admin.site.register(PortfolioView, PortfolioViewAdmin)
 
 

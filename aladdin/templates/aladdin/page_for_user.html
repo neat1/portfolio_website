@@ -1,0 +1,23 @@
+{% extends 'aladdin/base_generic.html' %}
+{% load static %}
+{% block content %}
+<h1>page for user</h1>
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+
+{% else %}
+    <p>Welcome, new user. Please log in.</p>
+{% endif %}
+{% for o in transactions %}
+<li><strong>Name of the portfolio:</strong> {{ o.portfolio.name}}</li>
+<li><strong>Name of the crypto:</strong> {{ o.coin}}</li>
+<p></p>
+<li>
+  <strong> total_trade_value:</strong> {{ o.total_trade_value }}
+</li>
+<p></p>
+<li><strong>ticker available:</strong> {{ o.date }}</li>
+{% endfor %}
+     
+
+{% endblock content %}

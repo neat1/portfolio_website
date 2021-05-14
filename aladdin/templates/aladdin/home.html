@@ -1,33 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <ul>
-      {% for member in transactions %}
-      <li><strong>Name of the crypto:</strong> {{ member.cutip}}</li>
-      <p></p>
-      <li>
-        <strong> total_trade_value:</strong> {{ member.total_trade_value }}
-      </li>
-      <p></p>
-      <li><strong>ticker available:</strong> {{ member.date }}</li>
-      {% endfor %}
-    </ul>
-    <p>one cutip :</p>
-    <p>/////////////////////////////////////////////////////////////
-    </p>
-    <ul>
-      <li><strong>one cutip:</strong> {{ one.name}}</li>
-      <li><strong>number_of_coins</strong> {{ one.ticker}}</li>
-      <li><strong> total_trade_value:</strong> {{ one.total_trade_value }}</li>
-      <li><strong>ticker available:</strong> {{ one.show_ticker2 }}</li>
-    </ul>
-  </body>
-  
-  </ul>
-</html>
+{% extends 'aladdin/base_generic.html' %}
+{% load static %}
+{% block content %}
+<h1>Homepage content</h1>
+{% endblock content %}
