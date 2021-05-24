@@ -54,4 +54,4 @@ class Transaction(models.Model):
     @property
     def transaction_ticker(self):
         return self.coin.ticker
-      
+    

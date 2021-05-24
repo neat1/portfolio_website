@@ -7,5 +7,6 @@ urlpatterns = [
     path('coin/', views.CoinListView.as_view(), name='coin'),
     path('register/', views.register, name='register'),
     path('trade/', views.add_trade, name='add_trade'),
+    path('upload/', views.upload, name ='upload'),
 
 ]
