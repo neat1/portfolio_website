@@ -8,5 +8,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('trade/', views.add_trade, name='add_trade'),
     path('upload/', views.upload, name ='upload'),
+    path('transactions/', views.all_transactions_page, name ='transactions'),
+    path('add_trade_manually/', views.add_trades_manually, name ='add_trade_manually'),
+    path('user/', views.userpage, name ='userpage'),
 
 ]

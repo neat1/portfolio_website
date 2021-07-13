@@ -1,4 +1,4 @@
-from aladdin.models import Portfolio, Transaction
+from aladdin.models import Transaction
 from django.contrib.auth.models import User
 from django import forms
 from django.core.exceptions import ValidationError
@@ -44,11 +44,11 @@ class RegistrationForm(forms.Form):
         return user
 
 
-
 class AddTransactionForm(forms.ModelForm):
-    
     class Meta:
         model = Transaction
         fields = "__all__"
         
+
+
 

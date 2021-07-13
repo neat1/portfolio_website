@@ -40,6 +40,7 @@ class Transaction(models.Model):
     trade_price = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField()
     
+    
 
     class Meta:
         ordering = ['-date']
@@ -51,7 +52,9 @@ class Transaction(models.Model):
     def total_trade_value(self):
         return self.trade_price * self.number_of_coins
 
+
     @property
     def transaction_ticker(self):
         return self.coin.ticker
+    
     

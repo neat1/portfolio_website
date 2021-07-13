@@ -1,0 +1,64 @@
+{% extends 'aladdin/base_generic.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h1>All Previous Transactions</h1>
+    <table class="table table-striped">
+      <tr>
+          <th>Currency</th>
+          <th>Number of coins</th>
+          <th>Trade Price</th>
+          <th>Total trade value</th>
+          <th>Date of purchase</th>
+          <th>Portfolio's name</th>
+      </tr>
+      {% for item in transactions %}
+      <tr> 
+          
+          <td>{{ item.coin.ticker }}</td>
+          <td>{{ item.number_of_coins }}</td>
+          <td>{{ item.trade_price }}</td>
+          <td>{{ item.total_trade_value }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.portfolio.name }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  {% if transactions.has_other_pages %}
+<div class="container" >
+  <div class="d-flex justify-content-center">
+    <ul class="pagination">
+      {% if transactions.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ transactions.previous_page_number }}">Previous</a></li>
+      {% else %}
+      <li class="page-item"><a class="disabled" href="#"></a></li>
+      {% endif %}
+      {% for i in transactions.paginator.page_range %}
+        {% if transactions.number == i %}
+      <li class="page-item"><a class="page-link" href="#">{{ i }}</a></li>
+        {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if transactions.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ transactions.next_page_number }}">Next</a></li>
+      {% else %}
+      <li class="page-item"><a class="disabled" href="#"></a></li>
+      {% endif %}
+      {% endif %}
+    </ul>  
+  </div>
+ 
+<div class="container">
+  
+
+
+
+
+
+
+
+  {% endblock content %}
