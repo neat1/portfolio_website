@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add our new application
     'aladdin.apps.AladdinConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +127,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/user'
+LOGIN_REDIRECT_URL = '/my_portfolio'

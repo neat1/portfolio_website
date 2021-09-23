@@ -1,0 +1,66 @@
+{% extends 'aladdin/dashboard.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Begin Page Content -->
+
+<!-- Begin Page Content -->
+
+ <!-- Begin Page Content -->
+ <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">This table shows all your previous transactions for each Cryptocurrency.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">All Previous Transactions</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Currency</th>
+                            <th>Number of coins</th>
+                            <th>Trade Price</th>
+                            <th>Total trade value</th>
+                            <th>Date of purchase</th>
+                            <th>Portfolio's name</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Currency</th>
+                            <th>Number of coins</th>
+                            <th>Trade Price</th>
+                            <th>Total trade value</th>
+                            <th>Date of purchase</th>
+                            <th>Portfolio's name</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for item in transactions %}
+                        <tr>
+                            <td>{{ item.coin.ticker }}</td>
+                            <td>{{ item.number_of_coins }}</td>
+                            <td>{{ item.trade_price }}</td>
+                            <td>{{ item.total_trade_value }}</td>
+                            <td>{{ item.date }}</td>
+                            <td>{{ item.portfolio.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'aladdin/dashboard.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Begin Page Content -->
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <p class="mb-4">This table shows your your total exposure for each Cryptocurrency.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Total Portfolio Value</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Currency</th>
+                            <th>Position</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for transaction in total_transactions %}
+                            <tr> 
+                            <td>{{ transaction.coin__name }}</td><td>{{ transaction.total }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% for item in portfolio %}
+                            <tr> 
+                                <td style="font-weight:bold">Total Portfolio Value</td><td style="font-weight:bold">{{ item.total_portfolio_value|floatformat:0 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+
+{% endblock content %}

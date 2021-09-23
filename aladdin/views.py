@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, redirect
 from .models import Transaction, Portfolio, Coin
 from django.views import generic
@@ -12,13 +13,42 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 def index(request):
+	# Main page here.
 	context = {}
-	return render(request, 'aladdin/home2.html', context)
+	return render(request, 'aladdin/index.html', context)
 
-@login_required
-def userpage(request):
-	context = {}
-	return render(request, 'aladdin/home.html', context)
+def test(request):
+	# test querys.
+	labels = []
+	data = []
+
+	filtered_transaction_query_by_user = Transaction.objects.filter(portfolio__user=request.user)
+	total_transactions_by_user =  filtered_transaction_query_by_user.values('coin__name').annotate( total = (Sum('trade_price') * Sum('number_of_coins'))).order_by('-total')
+
+	for each in total_transactions_by_user:
+		labels.append(each["coin__name"])
+		data.append(each["total"])
+
+	portfolio_query = Portfolio.objects.filter(user=request.user)
+		
+	context = {'total_transactions':total_transactions_by_user, 'labels': labels, 'data': data,}
+	return render(request, 'aladdin/pie_chart.html', context)
+
+
+def table_total_portfolio_value(request):
+	# Table Total Portoflio Value.
+	filtered_transaction_query_by_user = Transaction.objects.filter(portfolio__user=request.user)
+	total_transactions_by_user =  filtered_transaction_query_by_user.values('coin__name').annotate( total = (Sum('trade_price' ) * Sum('number_of_coins'))).order_by('-total')
+	portfolio_query = Portfolio.objects.filter(user=request.user)
+	context = {'total_transactions':total_transactions_by_user,'portfolio': portfolio_query,}
+	return render(request, 'aladdin/table_total_portfolio_value.html', context)
+
+
+def table_previous_transactions(request):
+	# Table Total Portoflio Value.
+	filtered_transaction_query_by_user = Transaction.objects.filter(portfolio__user=request.user)
+	context = {'transactions': filtered_transaction_query_by_user,}
+	return render(request, 'aladdin/table_previous_transactions.html', context)
 
 def register(request):
     if request.method == 'POST':
@@ -33,25 +63,25 @@ def register(request):
 
     return render(request, 'registration/register.html', {'form': f})
 
-@login_required
-def upload(request):
-	if request.method == 'POST':
-		uploaded_file = request.FILES['document']
-		fs = FileSystemStorage()
-		fs.save(uploaded_file.name, uploaded_file)
-	return render(request, 'aladdin/upload.html')
-
 
 @login_required
 def my_portfolio(request):
+	# Main Dashboard.
+	labels = []
+	data = []
+
 	filtered_transaction_query_by_user = Transaction.objects.filter(portfolio__user=request.user)
-	total_transactions_by_user =  filtered_transaction_query_by_user.values('coin__name').annotate( total = (Sum('trade_price' ) * Sum('number_of_coins'))).order_by('-total')
+	total_transactions_by_user =  filtered_transaction_query_by_user.values('coin__name').annotate( total = (Sum('trade_price' ) * Sum('number_of_coins'))).order_by('-total')	
 	portfolio_query = Portfolio.objects.filter(user=request.user)
-	context = {'total_transactions':total_transactions_by_user,'portfolio': portfolio_query,}
-	return render(request, 'aladdin/your_portfolio.html', context)
+	for each in total_transactions_by_user:
+		labels.append(each["coin__name"])
+		data.append(each["total"])
+	context = {'total_transactions':total_transactions_by_user,'portfolio': portfolio_query, 'labels': labels, 'data': data,}
+	return render(request, 'aladdin/dashboard.html', context)
 
 
 @login_required	
+# Old depreciated, might be useful in future.
 def add_trade(request):
 	if request.method == 'POST':
 		f = AddTransactionForm(request.POST)
@@ -66,19 +96,15 @@ def add_trade(request):
 	return render(request, 'aladdin/add_trade.html', {'form': f})
 
 @login_required
+# Old depreciated, might be useful in future.
 def add_trades_manually(request):
 	results=Transaction
 	return render(request, 'aladdin/add_trades_manually.html')
 
 
-	
-class CoinListView(generic.ListView):
-    model = Coin
-    queryset = Coin.objects.all() # Get 5 books containing the title war
-    template_name = 'aladdin/coin_list.html'  # Specify your own template name/location
-
 @login_required
 def all_transactions_page(request): 
+	# Old depreciated, might be useful in future.
 	filtered_transaction_query_by_user = Transaction.objects.filter(portfolio__user=request.user)
 	paginator = Paginator(filtered_transaction_query_by_user, 8)
 	page_number = request.GET.get('page')
