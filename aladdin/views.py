@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Sum
 from django.core.paginator import Paginator
+from django.core import serializers
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -28,11 +30,12 @@ def test(request):
 	for each in total_transactions_by_user:
 		labels.append(each["coin__name"])
 		data.append(each["total"])
-
+	context = {'transactions': filtered_transaction_query_by_user,}
 	portfolio_query = Portfolio.objects.filter(user=request.user)
+	return render(request, 'aladdin/test.html', context)
 		
-	context = {'total_transactions':total_transactions_by_user, 'labels': labels, 'data': data,}
-	return render(request, 'aladdin/pie_chart.html', context)
+	#context = {'total_transactions':total_transactions_by_user, 'labels': labels, 'data': data,}
+	#return render(request, 'aladdin/test.html', context)
 
 
 def table_total_portfolio_value(request):
