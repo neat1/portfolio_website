@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+#haha
 urlpatterns = [
     path('', views.index, name='index'),
     path('my_portfolio/', views.my_portfolio, name='my_portfolio'),
